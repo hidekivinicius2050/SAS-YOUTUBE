@@ -1,0 +1,80 @@
+📁 ARQUIVOS PARA UPLOAD NO GITHUB
+================================
+
+✅ ARQUIVOS PRINCIPAIS (OBRIGATÓRIOS):
+- server.js                    # Servidor Node.js principal
+- package.json                 # Dependências do projeto
+- index.html                   # Página de login
+- registro.html                # Página de registro
+- esqueceu-senha.html          # Recuperação de senha
+- buscador.html                # Buscador de vídeos
+- admin.html                   # Painel administrativo
+- README.md                    # Documentação completa
+- .gitignore                   # Arquivos ignorados pelo Git
+- INSTRUCOES_UPLOAD.md         # Instruções de upload
+
+✅ ARQUIVOS DE CONFIGURAÇÃO:
+- env.example                  # Exemplo de variáveis de ambiente
+- tsconfig.json               # Configuração TypeScript
+- tailwind.config.js          # Configuração Tailwind
+- postcss.config.js           # Configuração PostCSS
+
+✅ ARQUIVOS DE DOCUMENTAÇÃO:
+- COMO-USAR.md                # Guia de uso
+- COMO-INSTALAR.md            # Guia de instalação
+- INSTALACAO.md               # Instruções detalhadas
+- SECURITY.md                 # Documentação de segurança
+- stripe-config.md            # Configuração Stripe
+- aws-ses-config.md           # Configuração AWS SES
+
+✅ ARQUIVOS DE TESTE:
+- test-api.js                 # Teste da API do YouTube
+- check-user.js               # Verificação de usuários
+
+✅ ARQUIVOS DE SISTEMA:
+- backup-system.js            # Sistema de backup
+- email-service.js            # Serviço de email
+- security-logger.js          # Logger de segurança
+
+✅ ARQUIVOS DE AUTOMAÇÃO:
+- iniciar-sistema.bat         # Script para iniciar sistema
+- iniciar-background.bat      # Script para iniciar em background
+- gerenciar-servidor.bat      # Script para gerenciar servidor
+- testar-seguranca.bat        # Script para testar segurança
+- testar-nodejs.bat           # Script para testar Node.js
+
+✅ ARQUIVOS DE RECURSOS:
+- logo-tubeminer.png          # Logo da empresa
+- favicon.ico                 # Ícone do site
+
+✅ PASTAS IMPORTANTES:
+- src/                        # Código fonte (se houver)
+- public/                     # Arquivos públicos
+- guidelines/                 # Diretrizes do projeto
+
+❌ ARQUIVOS QUE NÃO DEVEM SER ENVIADOS:
+- node_modules/               # Dependências (serão instaladas)
+- database.db                 # Banco de dados local
+- tubeminer.db                # Banco de dados antigo
+- package-lock.json           # Lock file (será gerado)
+- .env                        # Variáveis de ambiente (privadas)
+- *.log                       # Arquivos de log
+- build/                      # Arquivos de build
+
+📋 INSTRUÇÕES DE UPLOAD:
+1. Acesse: https://github.com/hidekivinicius2050/SAS-YOUTUBE
+2. Clique em "Add file" → "Upload files"
+3. Arraste todos os arquivos marcados com ✅
+4. NÃO inclua os arquivos marcados com ❌
+5. Adicione mensagem de commit:
+   "🚀 Initial commit: TubeMine - Sistema completo de busca de vídeos"
+6. Clique em "Commit changes"
+
+🎯 TOTAL DE ARQUIVOS: ~30 arquivos principais + documentação
+
+✅ PROJETO PRONTO PARA UPLOAD!
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53

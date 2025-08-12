@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TubeMiner - Recuperar Senha</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <style>
+        /* RESET E BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        /* COLUNA ESQUERDA - RECUPERAÇÃO */
+        .recovery-section {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        /* LOGO */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            width: 64px;
+            height: 64px;
+        }
+        
+        .logo-text h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        
+        .logo-text p {
+            font-size: 14px;
+            color: #9ca3af;
+        }
+        
+        /* CARD DE RECUPERAÇÃO */
+        .recovery-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid #262626;
+            border-radius: 12px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .recovery-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .recovery-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .recovery-header p {
+            color: #9ca3af;
+            font-size: 16px;
+        }
+        
+        /* BADGES */
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(38, 38, 38, 0.8);
+            border: 1px solid #374151;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #ffffff;
+        }
+        
+        .badge svg {
+            width: 16px;
+            height: 16px;
+            color: #ef4444;
+        }
+        
+        /* FORMULÁRIO */
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .form-label svg {
+            width: 16px;
+            height: 16px;
+            color: #ef4444;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(38, 38, 38, 0.8);
+            border: 1px solid #374151;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #6b7280;
+        }
+        
+        /* BOTÃO */
+        .recovery-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+        }
+        
+        .recovery-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+        }
+        
+        .recovery-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* LINKS */
+        .links {
+            text-align: center;
+            font-size: 14px;
+            color: #9ca3af;
+        }
+        
+        .links a {
+            color: #ef4444;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .links a:hover {
+            color: #f87171;
+        }
+        
+        /* COLUNA DIREITA - FEATURES */
+        .features-section {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            padding-top: 60px;
+        }
+        
+        .features-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+        
+        .features-header p {
+            font-size: 18px;
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+        
+        .features-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .feature-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: rgba(26, 26, 26, 0.6);
+            border: 1px solid #262626;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            background: rgba(26, 26, 26, 0.8);
+            border-color: #374151;
+            transform: translateX(8px);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: #ef4444;
+        }
+        
+        .feature-content h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        
+        .feature-content p {
+            font-size: 14px;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+        
+        /* FOOTER */
+        .footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #262626;
+            margin-top: 60px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 16px;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+        
+        .footer-copyright {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        /* RESPONSIVO */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 20px;
+            }
+            
+            .features-section {
+                order: -1;
+            }
+            
+            .features-header h2 {
+                font-size: 28px;
+            }
+            
+            .features-header p {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .recovery-card {
+                padding: 24px;
+            }
+            
+            .badges {
+                gap: 8px;
+            }
+            
+            .badge {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .feature-card {
+                padding: 16px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+        
+        /* ANIMAÇÕES */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .recovery-section, .features-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .feature-card {
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- COLUNA ESQUERDA - RECUPERAÇÃO -->
+        <div class="recovery-section">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="logo-tubeminer.png" alt="TubeMiner">
+                <div class="logo-text">
+                                                <h1>TubeMine</h1>
+                            <p>Video Analytics Platform</p>
+                        </div>
+                    </div>
+            
+            <!-- Card de Recuperação -->
+            <div class="recovery-card">
+                <div class="recovery-header">
+                    <h2>Recuperar Senha</h2>
+                    <p>Digite seu email para receber instruções de recuperação</p>
+                </div>
+                
+                <!-- Badges -->
+                <div class="badges">
+                    <div class="badge">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                                </svg>
+                        <span>Seguro</span>
+                            </div>
+                    <div class="badge">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17c-.8 0-1.54.37-2.01 1l-4.7 6.28c-.37.5-.58 1.11-.58 1.73V20c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2z"/>
+                                </svg>
+                        <span>+10k usuários</span>
+                            </div>
+                    <div class="badge">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                                </svg>
+                        <span>Analytics</span>
+                            </div>
+                        </div>
+                        
+                <!-- Formulário -->
+                <form id="recoveryForm">
+                    <div class="form-group">
+                        <label class="form-label" for="email">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                    </svg>
+                                    <span>Email</span>
+                                </label>
+                        <input type="email" id="email" class="form-input" placeholder="seu@email.com" required>
+                            </div>
+                            
+                    <button type="submit" class="recovery-btn" id="submitBtn">
+                        Enviar Instruções
+                            </button>
+                        </form>
+                        
+                <!-- Links -->
+                <div class="links">
+                    <p>
+                                    Lembrou sua senha? 
+                        <a href="index.html">Fazer login</a>
+                                </p>
+                    <p>
+                                    Não tem uma conta? 
+                        <a href="registro.html">Criar conta</a>
+                    </p>
+                </div>
+                </div>
+            </div>
+
+        <!-- COLUNA DIREITA - FEATURES -->
+        <div class="features-section">
+            <div class="features-header">
+                <h2>Plataforma Profissional</h2>
+                <p>Ferramenta completa para análise e mineração de dados do YouTube</p>
+                    </div>
+                    
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                                </svg>
+                            </div>
+                    <div class="feature-content">
+                        <h3>Mineração Avançada</h3>
+                        <p>Análise completa de vídeos do YouTube com IA</p>
+                            </div>
+                        </div>
+                        
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                                </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Analytics em Tempo Real</h3>
+                        <p>Dashboards interativos e métricas detalhadas</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Big Data</h3>
+                        <p>Processamento de milhões de vídeos diariamente</p>
+                        </div>
+                    </div>
+                    
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                            </svg>
+                        </div>
+                    <div class="feature-content">
+                        <h3>Segurança Total</h3>
+                        <p>Criptografia e proteção de dados corporativos</p>
+                    </div>
+                    </div>
+                    
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+                            </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Insights Inteligentes</h3>
+                        <p>Identifica tendências e oportunidades</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        </div>
+                    <div class="feature-content">
+                        <h3>Performance</h3>
+                        <p>Processamento otimizado e resultados rápidos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">Termos de Uso</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Suporte Técnico</a>
+                <a href="#">API Docs</a>
+                </div>
+            <div class="footer-copyright">
+                    © 2025 TubeMiner Platform. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    
+    <script>
+            // Validação de email
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+        // Funções de erro e sucesso
+            function showError(input, message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.color = '#ef4444';
+            errorDiv.style.fontSize = '12px';
+            errorDiv.style.marginTop = '4px';
+            errorDiv.textContent = message;
+            
+            input.style.borderColor = '#ef4444';
+            input.parentNode.appendChild(errorDiv);
+        }
+        
+            function removeError(input) {
+                const errorDiv = input.parentNode.querySelector('.error-message');
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+            input.style.borderColor = '#374151';
+            }
+            
+            function showSuccess(message) {
+                const successDiv = document.createElement('div');
+            successDiv.style.background = 'rgba(34, 197, 94, 0.1)';
+            successDiv.style.border = '1px solid rgba(34, 197, 94, 0.2)';
+            successDiv.style.color = '#22c55e';
+            successDiv.style.padding = '12px';
+            successDiv.style.borderRadius = '8px';
+            successDiv.style.marginTop = '16px';
+            successDiv.style.textAlign = 'center';
+                successDiv.textContent = message;
+            
+            const form = document.getElementById('recoveryForm');
+            form.appendChild(successDiv);
+        }
+        
+        // Verificar status da sessão ao carregar
+        async function checkSessionStatus() {
+            try {
+                const response = await fetch('/api/session-status', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                
+                if (data.authenticated) {
+                    console.log('[SECURITY] Usuário já autenticado, redirecionando...');
+                    window.location.href = '/buscador.html';
+                }
+            } catch (error) {
+                console.error('[ERROR] Erro ao verificar sessão:', error);
+            }
+        }
+        
+        // Formulário de recuperação
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSessionStatus();
+            const recoveryForm = document.getElementById('recoveryForm');
+            const emailInput = document.getElementById('email');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Validação em tempo real
+            emailInput.addEventListener('blur', function() {
+                if (this.value.trim() && !isValidEmail(this.value)) {
+                    showError(this, 'Digite um email válido');
+                } else {
+                    removeError(this);
+                }
+            });
+            
+            // Submissão do formulário
+            recoveryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Remover erros anteriores
+                removeError(emailInput);
+                
+                // Validação
+                let isValid = true;
+                
+                if (!emailInput.value.trim()) {
+                    showError(emailInput, 'Email é obrigatório');
+                    isValid = false;
+                } else if (!isValidEmail(emailInput.value)) {
+                    showError(emailInput, 'Digite um email válido');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Simular envio
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Enviando...';
+                    submitBtn.disabled = true;
+                    
+                    // Fazer recuperação real no backend
+                    fetch('/api/clientes/recuperar-senha', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            email: emailInput.value
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showSuccess('Email de recuperação enviado! Verifique sua caixa de entrada.');
+                            emailInput.value = '';
+                        } else {
+                            showError(emailInput, data.error || 'Email não encontrado');
+                        }
+                        
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    })
+                    .catch(error => {
+                        showError(emailInput, 'Erro de conexão');
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

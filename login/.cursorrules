@@ -1,0 +1,42 @@
+# Cursor Rules para TubeMine
+
+## 🎯 Sobre o Projeto
+Este é um sistema completo de busca e análise de vídeos do YouTube com:
+- Sistema de autenticação
+- Buscador de vídeos com API do YouTube
+- Sistema de planos e pagamentos
+- Painel administrativo
+- Paginação e filtros avançados
+
+## 📁 Estrutura do Projeto
+- `server.js` - Servidor Node.js principal
+- `package.json` - Dependências
+- `*.html` - Páginas do frontend
+- `*.md` - Documentação
+
+## 🚀 Comandos Importantes
+- `npm install` - Instalar dependências
+- `npm start` - Iniciar servidor
+- `node test-api.js` - Testar API do YouTube
+
+## 🔧 Configuração
+- Porta: 3000
+- Banco: SQLite (database.db)
+- API: YouTube Data API v3
+
+## 📝 Padrões de Código
+- JavaScript ES6+
+- CSS nativo (sem frameworks)
+- HTML5 semântico
+- Comentários em português
+
+## 🎨 Design
+- Glassmorphism
+- Dark theme
+- Responsivo
+- Animações suaves
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TubeMiner - Registro</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <style>
+        /* RESET E BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        /* COLUNA ESQUERDA - REGISTRO */
+        .register-section {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        /* LOGO */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            width: 64px;
+            height: 64px;
+        }
+        
+        .logo-text h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        
+        .logo-text p {
+            font-size: 14px;
+            color: #9ca3af;
+        }
+        
+        /* CARD DE REGISTRO */
+        .register-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid #262626;
+            border-radius: 12px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .register-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .register-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .register-header p {
+            color: #9ca3af;
+            font-size: 16px;
+        }
+        
+        /* BADGES */
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(38, 38, 38, 0.8);
+            border: 1px solid #374151;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #ffffff;
+        }
+        
+        .badge svg {
+            width: 16px;
+            height: 16px;
+            color: #ef4444;
+        }
+        
+        /* FORMULÁRIO */
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .form-label svg {
+            width: 16px;
+            height: 16px;
+            color: #ef4444;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(38, 38, 38, 0.8);
+            border: 1px solid #374151;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #6b7280;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .password-toggle:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .password-toggle svg {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+        
+        /* CHECKBOX */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #ef4444;
+            margin-top: 2px;
+        }
+        
+        .checkbox-label {
+            font-size: 14px;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+        
+        .checkbox-label a {
+            color: #ef4444;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .checkbox-label a:hover {
+            color: #f87171;
+        }
+        
+        /* BOTÃO */
+        .register-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+        }
+        
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+        }
+        
+        .register-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* LINKS */
+        .links {
+            text-align: center;
+            font-size: 14px;
+            color: #9ca3af;
+        }
+        
+        .links a {
+            color: #ef4444;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .links a:hover {
+            color: #f87171;
+        }
+        
+        /* COLUNA DIREITA - FEATURES */
+        .features-section {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            padding-top: 60px;
+        }
+        
+        .features-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+        
+        .features-header p {
+            font-size: 18px;
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+        
+        .features-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .feature-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background: rgba(26, 26, 26, 0.6);
+            border: 1px solid #262626;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            background: rgba(26, 26, 26, 0.8);
+            border-color: #374151;
+            transform: translateX(8px);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: #ef4444;
+        }
+        
+        .feature-content h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        
+        .feature-content p {
+            font-size: 14px;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+        
+        /* FOOTER */
+        .footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #262626;
+            margin-top: 60px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 16px;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+        
+        .footer-copyright {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        /* RESPONSIVO */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 20px;
+            }
+            
+            .features-section {
+                order: -1;
+            }
+            
+            .features-header h2 {
+                font-size: 28px;
+            }
+            
+            .features-header p {
+                font-size: 16px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .register-card {
+                padding: 24px;
+            }
+            
+            .badges {
+                gap: 8px;
+            }
+            
+            .badge {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .feature-card {
+                padding: 16px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+        
+        /* ANIMAÇÕES */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .register-section, .features-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .feature-card {
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- COLUNA ESQUERDA - REGISTRO -->
+        <div class="register-section">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="logo-tubeminer.png" alt="TubeMiner">
+                <div class="logo-text">
+                                                <h1>TubeMine</h1>
+                            <p>Video Analytics Platform</p>
+                        </div>
+                    </div>
+            
+            <!-- Card de Registro -->
+            <div class="register-card">
+                <div class="register-header">
+                    <h2>Criar Conta</h2>
+                    <p>Junte-se à plataforma de análise de dados do YouTube</p>
+                </div>
+                
+                <!-- Badges -->
+                <div class="badges">
+                    <div class="badge">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                                </svg>
+                        <span>Seguro</span>
+                            </div>
+                    <div class="badge">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H17c-.8 0-1.54.37-2.01 1l-4.7 6.28c-.37.5-.58 1.11-.58 1.73V20c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2z"/>
+                                </svg>
+                        <span>+10k usuários</span>
+                            </div>
+                    <div class="badge">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                                </svg>
+                        <span>Analytics</span>
+                            </div>
+                        </div>
+                        
+                <!-- Formulário -->
+                <form id="registerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="nome">
+                                <svg fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                <span>Nome</span>
+                                </label>
+                            <input type="text" id="nome" class="form-input" placeholder="Seu nome completo" required>
+                            </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="empresa">
+                                <svg fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/>
+                                    </svg>
+                                <span>Empresa</span>
+                                </label>
+                            <input type="text" id="empresa" class="form-input" placeholder="Nome da empresa" required>
+                    </div>
+                </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <span>Email</span>
+                        </label>
+                        <input type="email" id="email" class="form-input" placeholder="seu@email.com" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="password">
+                                <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                </svg>
+                                <span>Senha</span>
+                            </label>
+                            <div class="password-container">
+                                <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                    <svg fill="currentColor" viewBox="0 0 24 24" id="eye-icon-password">
+                                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="confirmPassword">
+                                <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                </svg>
+                                <span>Confirmar Senha</span>
+                            </label>
+                            <div class="password-container">
+                                <input type="password" id="confirmPassword" class="form-input" placeholder="••••••••" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                    <svg fill="currentColor" viewBox="0 0 24 24" id="eye-icon-confirm">
+                                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Checkbox de termos -->
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" class="checkbox" required>
+                        <label for="terms" class="checkbox-label">
+                            Concordo com os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a> da TubeMiner Platform
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="register-btn" id="submitBtn">
+                        Criar Conta
+                    </button>
+                </form>
+                
+                <!-- Links -->
+                <div class="links">
+                    <p>
+                        Já tem uma conta? 
+                        <a href="index.html">Fazer login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUNA DIREITA - FEATURES -->
+        <div class="features-section">
+            <div class="features-header">
+                <h2>Plataforma Profissional</h2>
+                <p>Ferramenta completa para análise e mineração de dados do YouTube</p>
+                </div>
+                
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                            </svg>
+                        </div>
+                    <div class="feature-content">
+                        <h3>Mineração Avançada</h3>
+                        <p>Análise completa de vídeos do YouTube com IA</p>
+                    </div>
+                    </div>
+                    
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                            </svg>
+                        </div>
+                    <div class="feature-content">
+                        <h3>Analytics em Tempo Real</h3>
+                        <p>Dashboards interativos e métricas detalhadas</p>
+                    </div>
+                    </div>
+                    
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            </svg>
+                        </div>
+                    <div class="feature-content">
+                        <h3>Big Data</h3>
+                        <p>Processamento de milhões de vídeos diariamente</p>
+                    </div>
+                    </div>
+                    
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                            </svg>
+                        </div>
+                    <div class="feature-content">
+                        <h3>Segurança Total</h3>
+                        <p>Criptografia e proteção de dados corporativos</p>
+                    </div>
+                    </div>
+                    
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+                            </svg>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Insights Inteligentes</h3>
+                        <p>Identifica tendências e oportunidades</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        </div>
+                    <div class="feature-content">
+                        <h3>Performance</h3>
+                        <p>Processamento otimizado e resultados rápidos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-links">
+                <a href="#">Termos de Uso</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Suporte Técnico</a>
+                <a href="#">API Docs</a>
+                </div>
+            <div class="footer-copyright">
+                    © 2025 TubeMiner Platform. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    
+    <script>
+        // Toggle de senha
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            let eyeIcon;
+            
+            if (inputId === 'password') {
+                eyeIcon = document.getElementById('eye-icon-password');
+            } else if (inputId === 'confirmPassword') {
+                eyeIcon = document.getElementById('eye-icon-confirm');
+            }
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+            }
+        }
+            
+            // Validação de email
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+        // Funções de erro e sucesso
+            function showError(input, message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.color = '#ef4444';
+            errorDiv.style.fontSize = '12px';
+            errorDiv.style.marginTop = '4px';
+            errorDiv.textContent = message;
+            
+            input.style.borderColor = '#ef4444';
+            input.parentNode.appendChild(errorDiv);
+        }
+        
+            function removeError(input) {
+                const errorDiv = input.parentNode.querySelector('.error-message');
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+            input.style.borderColor = '#374151';
+            }
+            
+            function showSuccess(message) {
+                const successDiv = document.createElement('div');
+            successDiv.style.background = 'rgba(34, 197, 94, 0.1)';
+            successDiv.style.border = '1px solid rgba(34, 197, 94, 0.2)';
+            successDiv.style.color = '#22c55e';
+            successDiv.style.padding = '12px';
+            successDiv.style.borderRadius = '8px';
+            successDiv.style.marginTop = '16px';
+            successDiv.style.textAlign = 'center';
+                successDiv.textContent = message;
+            
+            const form = document.getElementById('registerForm');
+            form.appendChild(successDiv);
+        }
+        
+        // Verificar status da sessão ao carregar
+        async function checkSessionStatus() {
+            try {
+                const response = await fetch('/api/session-status', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                
+                if (data.authenticated) {
+                    console.log('[SECURITY] Usuário já autenticado, redirecionando...');
+                    window.location.href = '/buscador.html';
+                }
+            } catch (error) {
+                console.error('[ERROR] Erro ao verificar sessão:', error);
+            }
+        }
+        
+        // Formulário de registro
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSessionStatus();
+            const registerForm = document.getElementById('registerForm');
+            const nomeInput = document.getElementById('nome');
+            const empresaInput = document.getElementById('empresa');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const termsCheckbox = document.getElementById('terms');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Validação em tempo real
+            emailInput.addEventListener('blur', function() {
+                if (this.value.trim() && !isValidEmail(this.value)) {
+                    showError(this, 'Digite um email válido');
+                } else {
+                    removeError(this);
+                }
+            });
+            
+            passwordInput.addEventListener('blur', function() {
+                if (this.value.trim() && this.value.length < 6) {
+                    showError(this, 'A senha deve ter pelo menos 6 caracteres');
+                } else {
+                    removeError(this);
+                }
+            });
+            
+            confirmPasswordInput.addEventListener('blur', function() {
+                if (this.value.trim() && this.value !== passwordInput.value) {
+                    showError(this, 'As senhas não coincidem');
+                } else {
+                    removeError(this);
+                }
+            });
+            
+            // Submissão do formulário
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Remover erros anteriores
+                removeError(nomeInput);
+                removeError(empresaInput);
+                removeError(emailInput);
+                removeError(passwordInput);
+                removeError(confirmPasswordInput);
+                
+                // Validação
+                let isValid = true;
+                
+                if (!nomeInput.value.trim()) {
+                    showError(nomeInput, 'Nome é obrigatório');
+                    isValid = false;
+                }
+                
+                if (!empresaInput.value.trim()) {
+                    showError(empresaInput, 'Empresa é obrigatória');
+                    isValid = false;
+                }
+                
+                if (!emailInput.value.trim()) {
+                    showError(emailInput, 'Email é obrigatório');
+                    isValid = false;
+                } else if (!isValidEmail(emailInput.value)) {
+                    showError(emailInput, 'Digite um email válido');
+                    isValid = false;
+                }
+                
+                if (!passwordInput.value.trim()) {
+                    showError(passwordInput, 'Senha é obrigatória');
+                    isValid = false;
+                } else if (passwordInput.value.length < 6) {
+                    showError(passwordInput, 'A senha deve ter pelo menos 6 caracteres');
+                    isValid = false;
+                }
+                
+                if (!confirmPasswordInput.value.trim()) {
+                    showError(confirmPasswordInput, 'Confirme sua senha');
+                    isValid = false;
+                } else if (confirmPasswordInput.value !== passwordInput.value) {
+                    showError(confirmPasswordInput, 'As senhas não coincidem');
+                    isValid = false;
+                }
+                
+                if (!termsCheckbox.checked) {
+                    alert('Você deve aceitar os termos de uso');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Simular registro
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Criando conta...';
+                    submitBtn.disabled = true;
+                    
+                    // Fazer registro real no backend
+                    fetch('/api/clientes/registro', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            nome: nomeInput.value,
+                            empresa: empresaInput.value,
+                            email: emailInput.value,
+                            senha: passwordInput.value
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showSuccess('Conta criada com sucesso! Redirecionando para login...');
+                            setTimeout(() => {
+                                window.location.href = '/index.html';
+                            }, 2000);
+                        } else {
+                            showError(emailInput, data.error || 'Erro ao criar conta');
+                        }
+                        
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    })
+                    .catch(error => {
+                        showError(emailInput, 'Erro de conexão');
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

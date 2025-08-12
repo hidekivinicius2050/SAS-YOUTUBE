@@ -1,0 +1,2138 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscador de Vídeos Virais</title>
+  <style>
+    *, *:before, *:after {
+      box-sizing: border-box;
+    }
+    body { 
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+      margin: 0;
+      padding: 20px;
+      line-height: 1.2;
+      min-height: 100vh;
+    }
+    
+    /* Header moderno */
+    header { 
+      text-align: center; 
+      margin-bottom: 32px;
+      padding: 32px 0;
+      border-radius: 16px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 10;
+    }
+    
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.5px;
+<<<<<<< HEAD
+      color: #ffffff;
+=======
+      background: linear-gradient(45deg, #ef4444, #dc2626);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      color: #9ca3af;
+      margin: 0;
+    }
+    
+    main {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Formulário moderno */
+    form { 
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+      max-width: 1200px;
+      padding: 24px;
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      input, select, button {
+        font-size: 16px;
+      }
+      .results-container {
+      }
+      .results-container table {
+        min-width: 600px;
+      }
+    }
+    
+    input, select, button { 
+      padding: 16px 20px; 
+      font-size: 16px; 
+      width: 100%; 
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    select {
+      color: #ffffff !important;
+      background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+    
+    select option {
+      background-color: #1a1a1a !important;
+      color: #ffffff !important;
+      padding: 8px 12px;
+    }
+    
+    select option:hover {
+      background-color: #ef4444 !important;
+    }
+    
+    input::placeholder {
+      color: #9ca3af;
+      opacity: 1;
+    }
+    
+    input:focus, select:focus, button:focus {
+      outline: none;
+      border-color: #ef4444;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    button {
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    button.primary { 
+      background: linear-gradient(45deg, #ef4444, #dc2626);
+      border: none; 
+      color: #fff;
+      font-weight: 600;
+    }
+    
+    button.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+    }
+    
+    button.secondary { 
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-weight: 500;
+    }
+    
+    button.secondary:hover { 
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+    
+    button {
+      transition: all 0.3s ease;
+    }
+    
+    .results-inline {
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: visible;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .results-inline,
+    .filters-container-flex {
+      overflow: visible;
+    }
+
+    .filters-container-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly; 
+      padding: 16px 20px;
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px 16px 0 0;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+
+    .filter-item {
+      display: inline-flex;
+      align-items: center;
+      font-size: 14px;
+      padding: 6px 12px;
+      color: #9ca3af;
+    }
+
+    .filter-item label {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: 8px;
+    }
+
+    /* fallback para espaçamento se gap não funcionar */
+    .filter-item + .filter-item {
+      margin-left: 0;
+    }
+
+    /* Make sure the text is clickable as before */
+    .filter-item .clickable {
+      cursor: pointer;
+      color: #ef4444;
+      font-weight: 500;
+    }
+
+    .filter-item .clickable:hover {
+      text-decoration: underline;
+      color: #dc2626;
+    }
+}
+
+.filter-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin: 0;
+  margin-right: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px; 
+}
+
+/* Update dark mode styles */
+body.dark-mode .filters-container-flex {
+  background-color: #2c2c2e;
+}
+
+body.dark-mode .filter-item .clickable {
+  color: #1E90FF;
+}
+
+      .results-container {
+        background: rgba(26, 26, 26, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0 0 16px 16px;
+        max-height: none !important;
+        overflow-y: visible;
+      }
+      
+      table { 
+        width: 100%; 
+        border-collapse: collapse; 
+        border-spacing: 0;
+        table-layout: fixed;
+      }
+      
+      .metrics-table td {
+        text-align: center;
+        padding: 8px 4px;
+        width: 16.66%;
+        color: #ffffff;
+      }
+
+      #resultsTable thead {
+        display: none;
+      }
+      
+      #resultsTable th {
+        padding: 12px;
+        text-align: left;
+        font-weight: 600;
+        color: #9ca3af;
+      }
+      
+      #resultsTable tbody tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background-color 0.3s ease;
+      }
+      
+      #resultsTable tbody tr:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      
+      #resultsTable tbody tr:last-child {
+        border-bottom: none;
+      }
+    .thumbnail-cell {
+      width: 256px;
+      padding: 0;
+    }
+    
+    .thumbnail-container {
+      position: relative;
+      display: block;
+      width: 256px;
+      height: 144px;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .thumbnail-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: block;
+    }
+    
+    .thumbnail-container:hover {
+      transform: scale(1.05);
+    }
+    
+    .thumbnail-container:hover img {
+      opacity: 0.9;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+    .download-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .thumbnail-container:hover .download-overlay {
+      opacity: 1;
+    }
+    .download-icon {
+      color: white;
+      font-size: 24px;
+    }
+    .title-cell {
+      font-weight: 600;
+      text-align: left;
+      white-space: normal;
+      text-overflow: ellipsis;
+      margin-bottom: 8px;
+      padding-left: 16px;
+    }
+
+    .title-cell a.link-btn.channel-link {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+}
+body.dark-mode .title-cell a.link-btn.channel-link {
+  color: #999;
+}
+  
+    a.link-btn { 
+      color: #0071e3; 
+      text-decoration: none; 
+      font-weight: 500; 
+      margin-left: 8px;
+    }
+    a.link-btn:hover { 
+      text-decoration: underline; 
+    }
+    .error { 
+      background-color: #ff3b30; 
+      color: white; 
+      padding: 16px; 
+      margin-bottom: 24px; 
+      display: none;
+      border-radius: 12px;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Header moderno com navegação -->
+  <div style="background: rgba(26, 26, 26, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: sticky; top: 0; z-index: 100; margin: -20px -20px 20px -20px; padding: 16px 20px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <img src="logo-tubeminer.png" alt="TubeMiner" style="height: 40px; width: auto;">
+        <div>
+          <h2 style="margin: 0; font-size: 24px; font-weight: 700; background: linear-gradient(45deg, #ef4444, #dc2626); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">TubeMiner</h2>
+          <p style="margin: 0; font-size: 12px; color: #9ca3af;">Plataforma Profissional</p>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <!-- Menu de perfil do usuário -->
+        <div style="position: relative;">
+          <div onclick="toggleUserMenu()" style="
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+          " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <span id="userInitial">U</span>
+          </div>
+          
+          <!-- Dropdown do menu -->
+          <div id="userDropdown" style="
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+          ">
+            <!-- Informações do usuário -->
+            <div style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 12px; margin-bottom: 12px;">
+              <div style="font-weight: 600; color: white; font-size: 14px;" id="userName">Usuário</div>
+              <div style="color: #9ca3af; font-size: 12px;" id="userEmail">usuario@email.com</div>
+            </div>
+            
+            <!-- Botões do menu -->
+            <button onclick="showChangePasswordModal()" style="
+              width: 100%;
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              color: #fff;
+              padding: 8px 12px;
+              border-radius: 6px;
+              font-size: 13px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              margin-bottom: 8px;
+              text-align: left;
+            " onmouseover="this.style.background='rgba(255, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'">
+              🔐 Alterar Senha
+            </button>
+            
+            <button onclick="showWhatsAppSupport()" style="
+              width: 100%;
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              color: #fff;
+              padding: 8px 12px;
+              border-radius: 6px;
+              font-size: 13px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              margin-bottom: 8px;
+              text-align: left;
+            " onmouseover="this.style.background='rgba(255, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'">
+              💬 Suporte
+            </button>
+            
+            <button onclick="logout()" style="
+              width: 100%;
+              background: rgba(239, 68, 68, 0.2);
+              border: 1px solid rgba(239, 68, 68, 0.3);
+              color: #ef4444;
+              padding: 8px 12px;
+              border-radius: 6px;
+              font-size: 13px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              text-align: left;
+            " onmouseover="this.style.background='rgba(239, 68, 68, 0.3)'" onmouseout="this.style.background='rgba(239, 68, 68, 0.2)'">
+              🚪 Sair
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <h1>Buscador de Vídeos Virais</h1>
+    <p class="subtitle">Encontre os vídeos mais populares do YouTube. </p>
+  </header>
+  <main class="container">
+    <div id="errorMsg" class="error" role="alert"></div>
+    <form id="filterForm" action="#" method="get">
+      <input type="text" id="keywords" placeholder="Palavras-chave para busca" />
+      <input type="text" id="maxResults" placeholder="Número de vídeos" min="1" max="50" value="50"/>
+      <select id="language">
+        <option value="">Idioma</option>
+        <option value="pt">Português</option>
+        <option value="en">Inglês</option>
+        <option value="es">Espanhol</option>
+        <option value="fr">Francês</option>
+        <option value="de">Alemão</option>
+        <option value="it">Italiano</option>
+        <option value="ja">Japonês</option>
+        <option value="ko">Coreano</option>
+        <option value="zh">Chinês</option>
+        <option value="ru">Rússia</option>
+        <option value="ar">Árabe</option>
+        <option value="hi">Hindi</option>
+        <option value="tr">Turco</option>
+        <option value="nl">Holandês</option>
+        <option value="sv">Sueco</option>
+        <option value="pl">Polonês</option>
+      </select>
+      <select id="country">
+        <option value="">País</option>
+        <option value="BR">Brasil</option>
+        <option value="US">Estados Unidos</option>
+        <option value="GB">Reino Unido</option>
+        <option value="DE">Alemanha</option>
+        <option value="IN">Índia</option>
+        <option value="CA">Canadá</option>
+        <option value="AU">Austrália</option>
+        <option value="MX">México</option>
+        <option value="JP">Japão</option>
+        <option value="KR">Coreia do Sul</option>
+        <option value="CN">China</option>
+        <option value="RU">Rússia</option>
+        <option value="FR">França</option>
+        <option value="ES">Espanha</option>
+        <option value="IT">Itália</option>
+        <option value="AR">Argentina</option>
+        <option value="CL">Chile</option>
+        <option value="CO">Colômbia</option>
+        <option value="ZA">África do Sul</option>
+        <option value="PL">Polônia</option>
+      </select>
+      <input type="date" id="startDate" />
+      <input type="date" id="endDate" />
+      <input type="text" id="minViews" placeholder="Visualizações mínimas" />
+      <input type="text" id="minLikes" placeholder="Likes mínimos" />
+      <button type="button" class="primary">Buscar</button>
+      <button type="button" onclick="resetForm()" class="secondary">Limpar Filtros</button>
+    </form>
+    <div class="results-inline">
+      <div class="filters-container-flex">
+  <div class="filter-item">
+    <input type="checkbox" id="filter-duration" checked>
+    <label for="filter-duration">Duração</label>
+    <span class="clickable" onclick="toggleSort('duration')">↓↑</span>
+  </div>
+  <div class="filter-item">
+    <input type="checkbox" id="filter-date" checked>
+    <label for="filter-date">Upload</label>
+    <span class="clickable" onclick="toggleSort('date')">↓↑</span>
+  </div>
+  <div class="filter-item">
+    <input type="checkbox" id="filter-views" checked>
+    <label for="filter-views">Views</label>
+    <span class="clickable" onclick="toggleSort('views')">↓↑</span>
+  </div>
+  <div class="filter-item">
+    <input type="checkbox" id="filter-likes" checked>
+    <label for="filter-likes">Likes</label>
+    <span class="clickable" onclick="toggleSort('likes')">↓↑</span>
+  </div>
+  <div class="filter-item">
+    <input type="checkbox" id="filter-comments" checked>
+    <label for="filter-comments">Comentários</label>
+    <span class="clickable" onclick="toggleSort('comments')">↓↑</span>
+  </div>
+  <div class="filter-item">
+    <input type="checkbox" id="filter-channel" checked>
+    <label for="filter-channel">Canal Criado</label>
+    <span class="clickable" onclick="toggleSort('channel')">↓↑</span>
+  </div>
+  <div class="filter-item">
+    <input type="checkbox" id="filter-subscribers" checked>
+    <label for="filter-subscribers">Inscritos</label>
+    <span class="clickable" onclick="toggleSort('subscribers')">↓↑</span>
+  </div>
+</div>
+</div>
+
+<div class="results-container">
+    <table id="resultsTable">
+      <tbody></tbody>
+    </table>
+  </div>
+
+    </div>
+  </main>
+  <script>
+    // API Key padrão para todos os usuários
+    const DEFAULT_API_KEY = 'AIzaSyBIHrmvxVt1iKv8ZqBI5TRBZimYsmeKrEE';
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Verificar status da sessão e carregar dados do usuário
+      try {
+        const response = await fetch('/api/session-status', {
+          credentials: 'include'
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data.authenticated) {
+            // Armazenar dados do usuário
+            localStorage.setItem('userData', JSON.stringify({
+              id: data.user.id,
+              email: data.user.email,
+              nome: data.user.name,
+              plano: data.user.plano
+            }));
+            
+            // Carregar informações do usuário no menu
+            loadUserInfo();
+            
+<<<<<<< HEAD
+                  // Verificar status do plano
+      await checkPlanStatus();
+      
+      // Verificar parâmetros de URL para pagamento
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('success') === 'true') {
+        if (urlParams.get('test') === 'true') {
+          showNotification('🎉 Pagamento em modo de teste realizado com sucesso! Seu plano PRO foi ativado.', 'success');
+        } else {
+          showNotification('🎉 Pagamento realizado com sucesso! Seu plano PRO foi ativado.', 'success');
+        }
+        // Limpar parâmetros da URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } else if (urlParams.get('canceled') === 'true') {
+        showNotification('❌ Pagamento cancelado. Você pode tentar novamente quando quiser.', 'info');
+        // Limpar parâmetros da URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+=======
+            // Verificar status do plano
+            await checkPlanStatus();
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+          } else {
+            window.location.href = 'index.html';
+            return;
+          }
+        } else {
+          window.location.href = 'index.html';
+          return;
+        }
+      } catch (error) {
+        console.error('Erro ao verificar sessão:', error);
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const numberInputs = [document.getElementById('minViews'), document.getElementById('minLikes'), document.getElementById('maxResults')];
+      numberInputs.forEach(input => {
+        input.addEventListener('input', (e) => {
+          const value = e.target.value.replace(/\D/g, '');
+          if (value) {
+            e.target.value = Number(value).toLocaleString('pt-BR');
+          }
+        });
+      });
+
+      const filterKeys = ['duration', 'date', 'views', 'likes', 'comments', 'channel', 'subscribers'];
+      filterKeys.forEach(key => {
+        const checkbox = document.getElementById(`filter-${key}`);
+        if (checkbox) {
+          const saved = localStorage.getItem(`filter-${key}`);
+          checkbox.checked = saved !== 'false';
+          checkbox.addEventListener('change', () => {
+            localStorage.setItem(`filter-${key}`, checkbox.checked);
+            if (currentVideos.length) renderInline(currentVideos);
+          });
+        }
+        const sortSaved = localStorage.getItem(`sort-${key}`);
+        window[`${key}SortAsc`] = sortSaved === null ? false : sortSaved === 'true';
+        const span = document.querySelector(`#filter-${key} ~ .clickable`);
+        if (span) {
+          span.textContent = span.textContent.replace(/↓↑|↑↓/g, '');
+          span.textContent += window[`${key}SortAsc`] ? ' ↑↓' : ' ↓↑';
+        }
+      });
+
+      const searchButton = document.querySelector('button.primary');
+      searchButton.addEventListener('click', debounce(fetchData, 300));
+    });
+
+    function debounce(func, wait) {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+    }
+
+    function validateForm() {
+      const keywordsEl = document.getElementById('keywords');
+      const maxResultsEl = document.getElementById('maxResults');
+      
+      if (!keywordsEl || !maxResultsEl) {
+        alert('Elementos do formulário não encontrados.');
+        return false;
+      }
+      
+      const keywords = keywordsEl.value.trim();
+      const maxResultsRaw = maxResultsEl.value.replace(/\./g, '');
+      const maxResults = Number(maxResultsRaw) || 50;
+      
+      if (!keywords) {
+        alert('Insira palavras-chave.');
+        return false;
+      }
+      if (maxResults < 1 || maxResults > 50) {
+        alert('Número de vídeos deve estar entre 1 e 50.');
+        return false;
+      }
+      return true;
+    }
+
+    function resetForm() {
+      const form = document.getElementById('filterForm');
+      const maxResultsEl = document.getElementById('maxResults');
+      const tbody = document.querySelector('#resultsTable tbody');
+      const errorMsg = document.getElementById('errorMsg');
+      
+      if (form) form.reset();
+      if (maxResultsEl) maxResultsEl.value = Number(50).toLocaleString('pt-BR');
+      if (tbody) tbody.innerHTML = '';
+      if (errorMsg) errorMsg.style.display = 'none';
+    }
+
+    function formatDuration(isoDuration) {
+      const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      if (!match) return 'N/D';
+      const [, h, m, s] = match.map(x => parseInt(x) || 0);
+      return `${h ? h + ':' : ''}${(h && m < 10 ? '0' : '') + m}:${s < 10 ? '0' + s : s}`;
+    }
+
+    async function fetchData() {
+      if (!validateForm()) return;
+      
+      // Verificar status do plano antes de fazer a busca
+      const canSearch = await checkPlanStatus();
+      if (!canSearch) return;
+      const errorEl = document.getElementById('errorMsg');
+      const button = document.querySelector('button.primary');
+      errorEl.style.display = 'none';
+      button.disabled = true;
+      button.textContent = 'Buscando...';
+      try {
+        const apiKey = DEFAULT_API_KEY;
+        
+        // Verificar se todos os elementos existem antes de acessar suas propriedades
+        const keywordsEl = document.getElementById('keywords');
+        const languageEl = document.getElementById('language');
+        const countryEl = document.getElementById('country');
+        const minViewsEl = document.getElementById('minViews');
+        const minLikesEl = document.getElementById('minLikes');
+        const maxResultsEl = document.getElementById('maxResults');
+        const startDateEl = document.getElementById('startDate');
+        const endDateEl = document.getElementById('endDate');
+        
+        if (!keywordsEl || !languageEl || !countryEl || !minViewsEl || !minLikesEl || !maxResultsEl || !startDateEl || !endDateEl) {
+          throw new Error('Elementos do formulário não encontrados');
+        }
+        
+        let keywords = keywordsEl.value.trim();
+        const language = languageEl.value;
+        const country = countryEl.value;
+        const minViewsRaw = minViewsEl.value.replace(/\./g, '');
+        const minLikesRaw = minLikesEl.value.replace(/\./g, '');
+        const minViews = Number(minViewsRaw) || 0;
+        const minLikes = Number(minLikesRaw) || 0;
+        const maxResultsRaw = maxResultsEl.value.replace(/\./g, '');
+        let maxResults = Number(maxResultsRaw) || 50;
+        maxResults = Math.min(50, Math.max(1, maxResults));
+        const cacheKey = 'youtubeSearchCache';
+        const cache = JSON.parse(localStorage.getItem(cacheKey) || '{}');
+        const cacheTime = 1000 * 60 * 60;
+        const params = { apiKey, keywords, language, country, startDate: startDateEl.value, endDate: endDateEl.value, minViews, minLikes, maxResults };
+        const cacheId = JSON.stringify(params);
+
+        if (cache[cacheId] && Date.now() - cache[cacheId].timestamp < cacheTime) {
+          console.log({ event: 'fetchData', source: 'cache', params });
+          renderInline(cache[cacheId].data);
+          return;
+        }
+
+        if (language) {
+          try {
+            const resp = await fetch(
+              `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${language}&dt=t&q=${encodeURIComponent(keywords)}`
+            );
+            const arr = await resp.json();
+            keywords = arr[0].map(p => p[0]).join('');
+          } catch (err) {
+            console.warn('Falha na tradução:', err);
+          }
+        }
+
+        const searchParams = new URLSearchParams({ key: apiKey, part: 'snippet', q: keywords, type: 'video', maxResults: maxResults.toString(), videoDuration: 'long' });
+        if (language) searchParams.append('relevanceLanguage', language);
+        if (country) searchParams.append('regionCode', country);
+        if (params.startDate) searchParams.append('publishedAfter', `${params.startDate}T00:00:00Z`);
+        if (params.endDate) searchParams.append('publishedBefore', `${params.endDate}T23:59:59Z`);
+
+        const searchRes = await fetch(`https://www.googleapis.com/youtube/v3/search?${searchParams}`);
+        if (!searchRes.ok) {
+          if (searchRes.status === 403) throw new Error('Acesso proibido: verifique suas chaves e permissões.');
+          else throw new Error('Erro na busca: ' + searchRes.status);
+        }
+        const searchData = await searchRes.json();
+        console.log({ event: 'fetchData', source: 'api', params, response: searchData });
+        if (!searchData.items?.length) {
+          alert('Nenhum vídeo encontrado.');
+          return;
+        }
+
+        const videoIds = searchData.items.filter(i => i.id?.videoId).map(i => i.id.videoId);
+        const channelIds = searchData.items.filter(i => i.snippet?.channelId).map(i => i.snippet.channelId);
+        const idsParam = videoIds.join(",");
+        const channelIdsParam = channelIds.join(",");
+
+        const statsRes = await fetch(
+          `https://www.googleapis.com/youtube/v3/videos?${new URLSearchParams({ key: apiKey, part: 'snippet,statistics,contentDetails', id: idsParam })}`
+        );
+        if (!statsRes.ok) {
+          throw new Error('Erro ao obter estatísticas: ' + statsRes.status);
+        }
+        const statsData = await statsRes.json();
+
+        const channelRes = await fetch(
+          `https://www.googleapis.com/youtube/v3/channels?${new URLSearchParams({ key: apiKey, part: 'snippet,statistics', id: channelIdsParam })}`
+        );
+        if (!channelRes.ok) {
+          throw new Error('Erro ao obter informações do canal: ' + channelRes.status);
+        }
+        const channelData = await channelRes.json();
+        
+        const channelMap = new Map();
+        channelData.items.forEach(channel => {
+          const subscriberCount = Number(channel.statistics?.subscriberCount) || 0;
+          
+          channelMap.set(channel.id, {
+            creationDate: new Date(channel.snippet.publishedAt).toLocaleDateString(),
+            subscriberCount: subscriberCount
+          });
+        });
+
+        const videos = statsData.items.map(s => {
+          const channelInfo = channelMap.get(s.snippet.channelId) || { creationDate: 'N/D', subscriberCount: 0 };
+          const video = {
+            id: s.id,
+            title: s.snippet?.title || 'N/D',
+            thumbnail: s.snippet?.thumbnails?.high?.url || s.snippet?.thumbnails?.default?.url || '',
+            views: Number(s.statistics.viewCount) || 0,
+            likes: Number(s.statistics.likeCount) || 0,
+            comments: Number(s.statistics.commentCount) || 0,
+            duration: formatDuration(s.contentDetails?.duration || ''),
+            publishedAt: new Date(s.snippet?.publishedAt).toLocaleDateString() || 'N/D',
+            channelCreationDate: channelInfo.creationDate,
+            channelTitle: s.snippet?.channelTitle || 'N/D',
+            channelId: s.snippet?.channelId || 'N/D',
+            subscriberCount: channelInfo.subscriberCount
+          };
+          
+          return video;
+        }).filter(v => v.views >= minViews && v.likes >= minLikes);
+
+        console.log('Vídeos processados:', videos.map(v => ({ title: v.title, subscribers: v.subscriberCount })));
+        cache[cacheId] = { data: videos, timestamp: Date.now() };
+        localStorage.setItem(cacheKey, JSON.stringify(cache));
+        renderInline(videos);
+        
+        // Registrar a busca
+        registerSearch(keywords, videos.length);
+      } catch (err) {
+        console.error({ event: 'fetchDataError', error: err.message });
+        errorEl.textContent = err.message;
+        errorEl.style.display = 'block';
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Buscar';
+      }
+    }
+
+    let currentVideos = [];
+    
+    // Variáveis de paginação
+    let currentPage = 1;
+    const videosPerPage = 10;
+
+    function toggleSort(key) {
+      window[`${key}SortAsc`] = !window[`${key}SortAsc`];
+      localStorage.setItem(`sort-${key}`, window[`${key}SortAsc`]);
+      
+      const span = document.querySelector(`#filter-${key} ~ .clickable`);
+      if (span) {
+        span.textContent = span.textContent.replace(/↓↑|↑↓/g, '');
+        span.textContent += window[`${key}SortAsc`] ? ' ↑↓' : ' ↓↑';
+      }
+      
+      if (currentVideos.length) {
+        sortVideos(key);
+      }
+    }
+
+    function sortVideos(key) {
+      if (!currentVideos.length) return;
+      
+      switch(key) {
+        case 'duration':
+          currentVideos.sort((a, b) => {
+            const aSec = convertDurationToSeconds(a.duration);
+            const bSec = convertDurationToSeconds(b.duration);
+            return durationSortAsc ? aSec - bSec : bSec - aSec;
+          });
+          break;
+          
+        case 'date':
+          currentVideos.sort((a, b) => {
+            const parseDate = (dateStr) => {
+              if (!dateStr) return new Date(0);
+              const [day, month, year] = dateStr.split('/');
+              return new Date(`${year}-${month}-${day}`);
+            };
+            const aDate = parseDate(a.publishedAt);
+            const bDate = parseDate(b.publishedAt);
+            return dateSortAsc ? aDate - bDate : bDate - aDate;
+          });
+          break;
+          
+        case 'views':
+          currentVideos.sort((a, b) => viewsSortAsc ? a.views - b.views : b.views - a.views);
+          break;
+          
+        case 'likes':
+          currentVideos.sort((a, b) => likesSortAsc ? a.likes - b.likes : b.likes - a.likes);
+          break;
+          
+        case 'comments':
+          currentVideos.sort((a, b) => commentsSortAsc ? a.comments - b.comments : b.comments - a.comments);
+          break;
+          
+        case 'channel':
+          currentVideos.sort((a, b) => {
+            const parseDate = (dateStr) => {
+              if (!dateStr || dateStr === 'N/D') return new Date(0);
+              const [day, month, year] = dateStr.split('/');
+              return new Date(`${year}-${month}-${day}`);
+            };
+            const aDate = parseDate(a.channelCreationDate);
+            const bDate = parseDate(b.channelCreationDate);
+            return channelSortAsc ? aDate - bDate : bDate - aDate;
+          });
+          break;
+          
+        case 'subscribers':
+          currentVideos.sort((a, b) => {
+            const aSubs = a.subscriberCount || 0;
+            const bSubs = b.subscriberCount || 0;
+            return subscribersSortAsc ? aSubs - bSubs : bSubs - aSubs;
+          });
+          break;
+      }
+      
+      renderPage();
+    }
+
+    function convertDurationToSeconds(duration) {
+      if (!duration) return 0;
+      const parts = duration.split(':');
+      let seconds = 0;
+      if (parts.length === 3) {
+        seconds += parseInt(parts[0]) * 3600;
+        seconds += parseInt(parts[1]) * 60;
+        seconds += parseInt(parts[2]);
+      } else if (parts.length === 2) {
+        seconds += parseInt(parts[0]) * 60;
+        seconds += parseInt(parts[1]);
+      }
+      return seconds;
+    }
+
+   async function downloadThumbnail(urlOrId) {
+  // Extract videoId from URL if a full URL is provided
+  let videoId = urlOrId;
+  const urlPattern = /https:\/\/i\.ytimg\.com\/vi\/([^\/]+)\/[^\/]+\.jpg/;
+  if (urlPattern.test(urlOrId)) {
+    const match = urlOrId.match(urlPattern);
+    videoId = match ? match[1] : urlOrId; // Extract videoId or fallback to input
+  }
+
+  const sizes = ['maxresdefault.jpg', 'sddefault.jpg', 'hqdefault.jpg', 'default.jpg'];
+  for (const size of sizes) {
+    const thumbUrl = `https://i.ytimg.com/vi/${videoId}/${size}`;
+    try {
+      const response = await fetch(thumbUrl, { method: 'HEAD' }); // Check if URL exists
+      if (response.ok) {
+        const blobResponse = await fetch(thumbUrl); // Fetch the actual image
+        if (blobResponse.ok) {
+          const blob = await blobResponse.blob();
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `${videoId}.jpg`; // Use video ID as filename
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(a.href); // Clean up
+          return true; // Success
+        }
+      }
+    } catch (err) {
+      console.log(`Failed to download ${size} thumbnail for video ${videoId}:`, err);
+    }
+  }
+  // User feedback
+  alert(`Could not download thumbnail for video ${videoId}. Please try another video.`);
+  console.error('Could not download any thumbnail size for video:', videoId);
+  return false; // Failure
+}
+
+    function renderInline(data) {
+      currentVideos = [...data];
+      currentPage = 1; // Reset para primeira página
+      renderPage();
+    }
+
+    function renderPage() {
+      const tbody = document.querySelector('#resultsTable tbody');
+      if (!tbody) return;
+
+      const filters = {
+        duration: document.getElementById('filter-duration')?.checked ?? true,
+        date: document.getElementById('filter-date')?.checked ?? true,
+        views: document.getElementById('filter-views')?.checked ?? true,
+        likes: document.getElementById('filter-likes')?.checked ?? true,
+        comments: document.getElementById('filter-comments')?.checked ?? true,
+        channel: document.getElementById('filter-channel')?.checked ?? true,
+        subscribers: document.getElementById('filter-subscribers')?.checked ?? true
+      };
+
+      // Calcular vídeos para a página atual
+      const startIndex = (currentPage - 1) * videosPerPage;
+      const endIndex = startIndex + videosPerPage;
+      const videosToShow = currentVideos.slice(startIndex, endIndex);
+
+      tbody.innerHTML = '';
+      videosToShow.forEach(v => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="thumbnail-cell">
+            <div class="thumbnail-container">
+              <img src="${v.thumbnail}" alt="Thumbnail de ${v.title}" loading="lazy">
+              <div class="download-overlay" onclick="downloadThumbnail('${v.thumbnail}')">
+                <span class="download-icon">↓</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="title-cell">${v.title} 
+	    <br>
+	    <a href="https://www.youtube.com/watch?v=${v.id}" target="_blank" class="link-btn">Abrir</a> | <a href="${v.channelId !== 'N/D' ? `https://www.youtube.com/channel/${v.channelId}` : '#'}" target="_blank" class="link-btn" style="color: #86868b; font-weight: 400;">Canal: ${v.channelTitle}</a>
+	    </div>
+            <table class="metrics-table">
+              <tr>
+                <td style="${filters.duration ? '' : 'display: none;'}">Duração:<br>${v.duration}</td>
+                <td style="${filters.date ? '' : 'display: none;'}">Publicado:<br>${v.publishedAt}</td>
+                <td style="${filters.views ? '' : 'display: none;'}">Views:<br>${v.views.toLocaleString('pt-BR')}</td>
+                <td style="${filters.likes ? '' : 'display: none;'}">Likes:<br>${v.likes.toLocaleString('pt-BR')}</td>
+                <td style="${filters.comments ? '' : 'display: none;'}">Comentários:<br>${v.comments.toLocaleString('pt-BR')}</td>
+                <td style="${filters.channel ? '' : 'display: none;'}">Canal Criado<br>${v.channelCreationDate}</td>
+                <td style="${filters.subscribers ? '' : 'display: none;'}">Inscritos:<br>${v.subscriberCount ? v.subscriberCount.toLocaleString('pt-BR') : 'N/D'}</td>
+              </tr>
+            </table>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Renderizar paginação
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const totalPages = Math.ceil(currentVideos.length / videosPerPage);
+      if (totalPages <= 1) return;
+
+      // Remover paginação anterior se existir
+      const existingPagination = document.getElementById('pagination');
+      if (existingPagination) {
+        existingPagination.remove();
+      }
+
+      const paginationContainer = document.createElement('div');
+      paginationContainer.id = 'pagination';
+      paginationContainer.style.cssText = `
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin: 20px 0;
+        flex-wrap: nowrap;
+        flex-direction: row;
+      `;
+
+      // Botão Anterior
+      const prevButton = document.createElement('button');
+      prevButton.textContent = '← Anterior';
+      prevButton.disabled = currentPage === 1;
+      prevButton.style.cssText = `
+        background: ${currentPage === 1 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(239, 68, 68, 0.8)'};
+        border: 1px solid ${currentPage === 1 ? 'rgba(255, 255, 255, 0.2)' : 'rgba(239, 68, 68, 0.3)'};
+        color: ${currentPage === 1 ? '#6b7280' : 'white'};
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: ${currentPage === 1 ? 'not-allowed' : 'pointer'};
+        font-size: 14px;
+        transition: all 0.3s ease;
+      `;
+      prevButton.onclick = () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderPage();
+        }
+      };
+      paginationContainer.appendChild(prevButton);
+
+      // Container para números das páginas
+      const pageNumbersContainer = document.createElement('div');
+      pageNumbersContainer.style.cssText = `
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: 0 12px;
+      `;
+
+      // Números das páginas
+      const maxVisiblePages = 7;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+      if (endPage - startPage + 1 < maxVisiblePages) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+      }
+
+      // Primeira página
+      if (startPage > 1) {
+        const firstPageButton = document.createElement('button');
+        firstPageButton.textContent = '1';
+        firstPageButton.style.cssText = `
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: white;
+          padding: 6px 10px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 13px;
+          transition: all 0.3s ease;
+          min-width: 32px;
+        `;
+        firstPageButton.onclick = () => {
+          currentPage = 1;
+          renderPage();
+        };
+        pageNumbersContainer.appendChild(firstPageButton);
+
+        if (startPage > 2) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.cssText = `
+            color: #9ca3af;
+            padding: 0 4px;
+            font-size: 13px;
+            min-width: 16px;
+            text-align: center;
+          `;
+          pageNumbersContainer.appendChild(ellipsis);
+        }
+      }
+
+      // Páginas visíveis
+      for (let i = startPage; i <= endPage; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i.toString();
+        pageButton.style.cssText = `
+          background: ${i === currentPage ? 'rgba(239, 68, 68, 0.8)' : 'rgba(255, 255, 255, 0.1)'};
+          border: 1px solid ${i === currentPage ? 'rgba(239, 68, 68, 0.3)' : 'rgba(255, 255, 255, 0.2)'};
+          color: white;
+          padding: 6px 10px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 13px;
+          transition: all 0.3s ease;
+          min-width: 32px;
+        `;
+        pageButton.onclick = () => {
+          currentPage = i;
+          renderPage();
+        };
+        pageNumbersContainer.appendChild(pageButton);
+      }
+
+      // Última página
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.cssText = `
+            color: #9ca3af;
+            padding: 0 4px;
+            font-size: 13px;
+            min-width: 16px;
+            text-align: center;
+          `;
+          pageNumbersContainer.appendChild(ellipsis);
+        }
+
+        const lastPageButton = document.createElement('button');
+        lastPageButton.textContent = totalPages.toString();
+        lastPageButton.style.cssText = `
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          color: white;
+          padding: 6px 10px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 13px;
+          transition: all 0.3s ease;
+          min-width: 32px;
+        `;
+        lastPageButton.onclick = () => {
+          currentPage = totalPages;
+          renderPage();
+        };
+        pageNumbersContainer.appendChild(lastPageButton);
+      }
+
+      // Adicionar container de números ao pagination
+      paginationContainer.appendChild(pageNumbersContainer);
+
+      // Botão Próximo
+      const nextButton = document.createElement('button');
+      nextButton.textContent = 'Próximo →';
+      nextButton.disabled = currentPage === totalPages;
+      nextButton.style.cssText = `
+        background: ${currentPage === totalPages ? 'rgba(255, 255, 255, 0.1)' : 'rgba(239, 68, 68, 0.8)'};
+        border: 1px solid ${currentPage === totalPages ? 'rgba(255, 255, 255, 0.2)' : 'rgba(239, 68, 68, 0.3)'};
+        color: ${currentPage === totalPages ? '#6b7280' : 'white'};
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: ${currentPage === totalPages ? 'not-allowed' : 'pointer'};
+        font-size: 14px;
+        transition: all 0.3s ease;
+      `;
+      nextButton.onclick = () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderPage();
+        }
+      };
+      paginationContainer.appendChild(nextButton);
+
+      // Informações da página
+      const pageInfo = document.createElement('div');
+      pageInfo.style.cssText = `
+        color: #9ca3af;
+        font-size: 13px;
+        margin-left: 16px;
+        white-space: nowrap;
+      `;
+      const startIndex = (currentPage - 1) * videosPerPage + 1;
+      const endIndex = Math.min(currentPage * videosPerPage, currentVideos.length);
+      pageInfo.textContent = `${startIndex}-${endIndex} de ${currentVideos.length}`;
+      paginationContainer.appendChild(pageInfo);
+
+      // Inserir após a tabela
+      const resultsTable = document.getElementById('resultsTable');
+      if (resultsTable) {
+        resultsTable.parentNode.insertBefore(paginationContainer, resultsTable.nextSibling);
+      }
+    }
+
+    // Popup de Planos
+    function showPlansPopup() {
+      // Verificar se o plano gratuito já foi usado
+      const freePlanUsed = localStorage.getItem('freePlanUsed') === 'true';
+      
+      const popup = document.createElement('div');
+      popup.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+      `;
+      
+      // HTML do popup baseado no status do plano gratuito
+<<<<<<< HEAD
+      const freePlanBlocked = localStorage.getItem('freePlanBlocked') === 'true';
+=======
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+      const popupContent = freePlanUsed ? `
+        <div style="
+          background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
+          border: 2px solid rgba(239, 68, 68, 0.3);
+          border-radius: 16px;
+          padding: 24px;
+          max-width: 380px;
+          width: 90%;
+          text-align: center;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(239, 68, 68, 0.1);
+          position: relative;
+          animation: popupSlideIn 0.3s ease-out;
+        ">
+          <style>
+            @keyframes popupSlideIn {
+              from { transform: scale(0.8) translateY(20px); opacity: 0; }
+              to { transform: scale(1) translateY(0); opacity: 1; }
+            }
+          </style>
+          
+<<<<<<< HEAD
+          ${freePlanBlocked ? '' : `<button onclick="this.parentElement.parentElement.remove()" style="
+=======
+          <button onclick="this.parentElement.parentElement.remove()" style="
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #9ca3af;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+<<<<<<< HEAD
+          " onmouseover="this.style.background='rgba(239, 68, 68, 0.2)'; this.style.color='#ef4444'" onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='#9ca3af'">×</button>`}
+=======
+          " onmouseover="this.style.background='rgba(239, 68, 68, 0.2)'; this.style.color='#ef4444'" onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='#9ca3af'">×</button>
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+          
+          <div style="margin-bottom: 24px;">
+            <div style="
+              width: 60px;
+              height: 60px;
+              background: linear-gradient(45deg, #ef4444, #dc2626);
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 0 auto 16px auto;
+              box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+            ">
+              <span style="font-size: 28px; color: white; font-weight: bold;">⚡</span>
+            </div>
+            
+            <h2 style="
+              margin: 0 0 8px 0;
+              font-size: 24px;
+              font-weight: 800;
+              background: linear-gradient(45deg, #ef4444, #dc2626);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+              letter-spacing: -0.5px;
+            ">Assine o PRO</h2>
+<<<<<<< HEAD
+            <p style="margin: 0; color: #9ca3af; font-size: 14px; line-height: 1.4;">
+              ${freePlanBlocked ? 'Seu plano gratuito foi usado. Assine o PRO para continuar!' : 'Desbloqueie buscas ilimitadas'}
+            </p>
+=======
+            <p style="margin: 0; color: #9ca3af; font-size: 14px; line-height: 1.4;">Desbloqueie buscas ilimitadas</p>
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+          </div>
+          
+          <!-- Apenas Plano PRO -->
+          <div style="margin-bottom: 24px;">
+            <div style="
+              background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+              border: 2px solid rgba(239, 68, 68, 0.3);
+              border-radius: 12px;
+              padding: 20px;
+              text-align: center;
+            ">
+              <h3 style="margin: 0 0 8px 0; color: #ef4444; font-size: 18px;">PRO</h3>
+              <div style="
+                background: linear-gradient(45deg, #ef4444, #dc2626);
+                color: white;
+                padding: 12px;
+                border-radius: 8px;
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: 12px;
+              ">R$ 19,90/mês</div>
+              <ul style="
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                text-align: left;
+                font-size: 12px;
+              ">
+                <li style="padding: 4px 0; color: #ffffff;">✓ Buscas ilimitadas</li>
+                <li style="padding: 4px 0; color: #ffffff;">✓ Filtros avançados</li>
+                <li style="padding: 4px 0; color: #ffffff;">✓ Suporte prioritário</li>
+              </ul>
+              <button onclick="subscribeToPro()" style="
+                background: linear-gradient(45deg, #ef4444, #dc2626);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                width: 100%;
+                margin-top: 12px;
+                transition: all 0.3s ease;
+              " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                🚀 Assinar PRO
+              </button>
+            </div>
+          </div>
+        </div>
+      ` : `
+        <div style="
+          background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
+          border: 2px solid rgba(239, 68, 68, 0.3);
+          border-radius: 16px;
+          padding: 24px;
+          max-width: 380px;
+          width: 90%;
+          text-align: center;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(239, 68, 68, 0.1);
+          position: relative;
+          animation: popupSlideIn 0.3s ease-out;
+        ">
+          <style>
+            @keyframes popupSlideIn {
+              from { transform: scale(0.8) translateY(20px); opacity: 0; }
+              to { transform: scale(1) translateY(0); opacity: 1; }
+            }
+          </style>
+          
+          <button onclick="this.parentElement.parentElement.remove()" style="
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #9ca3af;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+          " onmouseover="this.style.background='rgba(239, 68, 68, 0.2)'; this.style.color='#ef4444'" onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='#9ca3af'">×</button>
+          
+          <div style="margin-bottom: 24px;">
+            <div style="
+              width: 60px;
+              height: 60px;
+              background: linear-gradient(45deg, #ef4444, #dc2626);
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 0 auto 16px auto;
+              box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+            ">
+              <span style="font-size: 28px; color: white; font-weight: bold;">⚡</span>
+            </div>
+            
+            <h2 style="
+              margin: 0 0 8px 0;
+              font-size: 24px;
+              font-weight: 800;
+              background: linear-gradient(45deg, #ef4444, #dc2626);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+              letter-spacing: -0.5px;
+            ">Escolha seu Plano</h2>
+            <p style="margin: 0; color: #9ca3af; font-size: 14px; line-height: 1.4;">Teste grátis ou assine o PRO</p>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+            <!-- Plano Gratuito -->
+            <div style="
+              background: rgba(255, 255, 255, 0.05);
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              border-radius: 12px;
+              padding: 20px;
+              text-align: center;
+            ">
+              <h3 style="margin: 0 0 8px 0; color: #ffffff; font-size: 18px;">Gratuito</h3>
+              <div style="
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                padding: 12px;
+                border-radius: 8px;
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: 12px;
+              ">R$ 0,00</div>
+              <ul style="
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                text-align: left;
+                font-size: 12px;
+              ">
+                <li style="padding: 4px 0; color: #9ca3af;">✓ 1 busca gratuita</li>
+                <li style="padding: 4px 0; color: #9ca3af;">✓ Filtros básicos</li>
+                <li style="padding: 4px 0; color: #9ca3af;">✓ Resultados limitados</li>
+              </ul>
+              <button onclick="useFreePlan()" style="
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                width: 100%;
+                margin-top: 12px;
+                transition: all 0.3s ease;
+              " onmouseover="this.style.background='rgba(255, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'">
+                Usar Gratuito
+              </button>
+            </div>
+            
+            <!-- Plano PRO -->
+            <div style="
+              background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+              border: 2px solid rgba(239, 68, 68, 0.3);
+              border-radius: 12px;
+              padding: 20px;
+              text-align: center;
+            ">
+              <h3 style="margin: 0 0 8px 0; color: #ef4444; font-size: 18px;">PRO</h3>
+              <div style="
+                background: linear-gradient(45deg, #ef4444, #dc2626);
+                color: white;
+                padding: 12px;
+                border-radius: 8px;
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: 12px;
+              ">R$ 19,90/mês</div>
+              <ul style="
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                text-align: left;
+                font-size: 12px;
+              ">
+                <li style="padding: 4px 0; color: #ffffff;">✓ Buscas ilimitadas</li>
+                <li style="padding: 4px 0; color: #ffffff;">✓ Filtros avançados</li>
+                <li style="padding: 4px 0; color: #ffffff;">✓ Suporte prioritário</li>
+              </ul>
+              <button onclick="subscribeToPro()" style="
+                background: linear-gradient(45deg, #ef4444, #dc2626);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                width: 100%;
+                margin-top: 12px;
+                transition: all 0.3s ease;
+              " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                🚀 Assinar PRO
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      popup.innerHTML = popupContent;
+      
+      document.body.appendChild(popup);
+    }
+
+    // Função para assinar PRO
+    async function subscribeToPro() {
+      try {
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            priceId: 'price_1RuR47HXe3ew16y7eqYWC47g',
+            userId: userData.id
+          })
+        });
+
+        if (response.ok) {
+          const session = await response.json();
+          console.log('Redirecionando para:', session.url);
+<<<<<<< HEAD
+          
+          // Se for modo de teste, mostrar notificação
+          if (session.test) {
+            showNotification('Modo de teste ativado! Seu plano PRO foi ativado com sucesso.', 'success');
+            setTimeout(() => {
+              window.location.href = session.url;
+            }, 2000);
+          } else {
+            window.location.href = session.url;
+          }
+        } else {
+          const errorData = await response.text();
+          console.error('Erro na resposta:', errorData);
+          showNotification('Erro ao criar sessão de pagamento. Tente novamente.', 'error');
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+        showNotification('Erro ao processar pagamento. Tente novamente.', 'error');
+=======
+          window.location.href = session.url;
+        } else {
+          const errorData = await response.text();
+          console.error('Erro na resposta:', errorData);
+          alert('Erro ao criar sessão de pagamento. Tente novamente.');
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao processar pagamento. Tente novamente.');
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+      }
+    }
+
+    // Função para usar plano gratuito
+    async function useFreePlan() {
+      try {
+        // Marcar que o plano gratuito foi usado
+        localStorage.setItem('freePlanUsed', 'true');
+        
+        // Fechar popup e permitir busca
+        const popup = document.querySelector('div[style*="position: fixed"]');
+        if (popup) popup.remove();
+        
+        // Mostrar notificação bonita
+        showNotification('Plano gratuito ativado! Você tem 1 busca disponível.', 'success');
+<<<<<<< HEAD
+        
+        // Permitir apenas 1 busca e depois bloquear
+        setTimeout(() => {
+          // Após a busca ser realizada, bloquear completamente
+          localStorage.setItem('freePlanBlocked', 'true');
+        }, 1000);
+=======
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+      } catch (error) {
+        console.error('Erro:', error);
+        showNotification('Erro ao ativar plano gratuito: ' + error.message, 'error');
+      }
+    }
+
+    // Função para verificar status do plano
+    async function checkPlanStatus() {
+      try {
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        if (!userData.id) {
+          console.error('ID do usuário não encontrado');
+          return false;
+        }
+
+        console.log('Verificando plano para usuário:', userData.email);
+
+        // Primeiro verificar status da assinatura Stripe
+        try {
+          const subscriptionResponse = await fetch(`/api/subscription-status/${userData.id}`, {
+            credentials: 'include'
+          });
+          
+          if (subscriptionResponse.ok) {
+            const subscriptionData = await subscriptionResponse.json();
+            console.log('Dados da assinatura:', subscriptionData);
+            
+            if (subscriptionData.isPro) {
+              console.log('✅ Usuário tem plano PRO ativo via Stripe');
+              return true; // Usuário PRO não precisa verificar mais nada
+            }
+          }
+        } catch (error) {
+          console.log('Erro ao verificar assinatura Stripe:', error);
+        }
+
+        // Se não é PRO, verificar plano gratuito
+        try {
+          const planResponse = await fetch(`/api/plano-status/${userData.id}`, {
+            credentials: 'include'
+          });
+          
+          if (planResponse.ok) {
+            const planData = await planResponse.json();
+            console.log('Status do plano:', planData);
+            
+            if (planData.plano === 'pro' || planData.plano === 'pago') {
+              console.log('✅ Usuário tem plano pago/PRO');
+              return true;
+            }
+            
+            if (planData.buscas_gratuitas_restantes > 0) {
+              console.log('✅ Usuário tem buscas gratuitas restantes:', planData.buscas_gratuitas_restantes);
+              return true;
+            }
+          }
+        } catch (error) {
+          console.log('Erro ao verificar plano:', error);
+        }
+
+<<<<<<< HEAD
+        // Verificar se o plano gratuito foi bloqueado
+        const freePlanBlocked = localStorage.getItem('freePlanBlocked') === 'true';
+        if (freePlanBlocked) {
+          console.log('❌ Plano gratuito foi bloqueado após primeira busca');
+          showPlansPopup();
+          return false;
+        }
+
+=======
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+        // Se chegou aqui, não tem plano válido
+        console.log('❌ Usuário não tem plano válido, mostrando popup');
+        showPlansPopup();
+        return false;
+        
+      } catch (error) {
+        console.error('Erro geral ao verificar status do plano:', error);
+        // Em caso de erro, permitir a busca mas mostrar popup depois
+        return true;
+      }
+    }
+
+    // Funções do menu de perfil
+    function toggleUserMenu() {
+      const dropdown = document.getElementById('userDropdown');
+      if (dropdown.style.display === 'block') {
+        dropdown.style.display = 'none';
+      } else {
+        dropdown.style.display = 'block';
+      }
+    }
+
+    // Fechar menu quando clicar fora
+    document.addEventListener('click', function(event) {
+      const dropdown = document.getElementById('userDropdown');
+      const avatar = document.querySelector('[onclick="toggleUserMenu()"]');
+      
+      if (dropdown && !dropdown.contains(event.target) && !avatar.contains(event.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+
+    // Carregar informações do usuário
+    function loadUserInfo() {
+      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+      if (userData.nome) {
+        document.getElementById('userName').textContent = userData.nome;
+        document.getElementById('userEmail').textContent = userData.email;
+        document.getElementById('userInitial').textContent = userData.nome.charAt(0).toUpperCase();
+      }
+    }
+
+    // Função de logout
+    function logout() {
+      fetch('/api/logout', {
+        method: 'POST',
+        credentials: 'include'
+      }).then(() => {
+        localStorage.removeItem('userData');
+        window.location.href = 'index.html';
+      }).catch(error => {
+        console.error('Erro no logout:', error);
+        localStorage.removeItem('userData');
+        window.location.href = 'index.html';
+      });
+    }
+
+    // Função para mostrar suporte WhatsApp
+    function showWhatsAppSupport() {
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        backdrop-filter: blur(10px);
+      `;
+      
+      modal.innerHTML = `
+        <div style="
+          background: rgba(26, 26, 26, 0.95);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          padding: 30px;
+          max-width: 400px;
+          width: 90%;
+          text-align: center;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        ">
+          <h3 style="margin: 0 0 20px 0; color: white; font-size: 24px;">💬 Suporte</h3>
+          <p style="color: #9ca3af; margin-bottom: 20px; line-height: 1.6;">
+            Precisa de ajuda? Entre em contato conosco via WhatsApp!
+          </p>
+          <div style="
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+          ">
+            <div style="color: #25d366; font-weight: 600; margin-bottom: 8px;">WhatsApp</div>
+            <div style="color: white; font-size: 18px; font-weight: 600;">+55 (11) 99999-9999</div>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <button onclick="this.parentElement.parentElement.parentElement.remove()" style="
+              flex: 1;
+              background: rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              color: white;
+              padding: 12px;
+              border-radius: 8px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+            " onmouseover="this.style.background='rgba(255, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'">
+              Fechar
+            </button>
+            <button onclick="window.open('https://wa.me/5511999999999?text=Olá! Preciso de suporte com o TubeMine.', '_blank')" style="
+              flex: 1;
+              background: linear-gradient(135deg, #25d366, #128c7e);
+              border: none;
+              color: white;
+              padding: 12px;
+              border-radius: 8px;
+              cursor: pointer;
+              font-weight: 600;
+              transition: all 0.3s ease;
+            " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+              Abrir WhatsApp
+            </button>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+    }
+
+    // Função para mostrar notificações bonitas
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' : 
+                     type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' : 
+                     'linear-gradient(135deg, #3b82f6, #2563eb)'};
+        color: white;
+        padding: 16px 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        z-index: 10000;
+        font-weight: 600;
+        font-size: 14px;
+        max-width: 300px;
+        animation: slideInRight 0.3s ease-out;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      `;
+      
+      notification.innerHTML = `
+        <style>
+          @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+          }
+        </style>
+        ${message}
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Remover após 4 segundos
+      setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in';
+        notification.style.transform = 'translateX(100%)';
+        notification.style.opacity = '0';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 4000);
+    }
+
+    // Função para registrar busca
+    async function registerSearch(query, results) {
+      const freePlanUsed = localStorage.getItem('freePlanUsed') === 'true';
+      
+      if (freePlanUsed) {
+        // Se o plano gratuito foi usado, marcar que a busca foi realizada
+        localStorage.setItem('freePlanUsed', 'true');
+<<<<<<< HEAD
+        // BLOQUEAR COMPLETAMENTE após a primeira busca
+        localStorage.setItem('freePlanBlocked', 'true');
+        showNotification('Busca realizada! Para continuar usando, assine o plano PRO.', 'info');
+        
+        // Após a busca, mostrar popup para assinar PRO e BLOQUEAR
+=======
+        showNotification('Busca realizada! Para continuar usando, assine o plano PRO.', 'info');
+        
+        // Após a busca, mostrar popup para assinar PRO
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+        setTimeout(() => {
+          showPlansPopup();
+        }, 2000);
+      }
+      
+      console.log('Busca realizada:', { query, results });
+    }
+
+<<<<<<< HEAD
+    // Mostrar popup de planos após 5 segundos (apenas se não tiver plano gratuito usado)
+    setTimeout(() => {
+      const freePlanUsed = localStorage.getItem('freePlanUsed') === 'true';
+      const freePlanBlocked = localStorage.getItem('freePlanBlocked') === 'true';
+      
+      if (!freePlanUsed && !freePlanBlocked) {
+        showPlansPopup();
+      }
+=======
+    // Mostrar popup de planos após 5 segundos
+    setTimeout(() => {
+      showPlansPopup();
+>>>>>>> c14af1105adcad036b4e6979e1017aa14437bc53
+    }, 5000);
+
+    // Função para mostrar modal de alterar senha
+    function showChangePasswordModal() {
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        backdrop-filter: blur(5px);
+      `;
+      
+      modal.innerHTML = `
+        <div style="
+          background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          padding: 32px;
+          max-width: 400px;
+          width: 90%;
+          text-align: center;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+          position: relative;
+        ">
+          <button onclick="this.parentElement.parentElement.remove()" style="
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          ">×</button>
+          
+          <h2 style="
+            margin: 0 0 24px 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+          ">Alterar Senha</h2>
+          
+          <form id="changePasswordForm" style="text-align: left; display: flex; flex-direction: column; gap: 16px;">
+            <div>
+              <label style="display: block; margin-bottom: 8px; color: #9ca3af; font-size: 14px;">Senha Atual</label>
+              <input type="password" id="currentPassword" required style="
+                width: 100%;
+                padding: 12px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                color: #ffffff;
+                font-size: 14px;
+                box-sizing: border-box;
+              ">
+            </div>
+            
+            <div>
+              <label style="display: block; margin-bottom: 8px; color: #9ca3af; font-size: 14px;">Nova Senha</label>
+              <input type="password" id="newPassword" required style="
+                width: 100%;
+                padding: 12px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                color: #ffffff;
+                font-size: 14px;
+                box-sizing: border-box;
+              ">
+            </div>
+            
+            <div>
+              <label style="display: block; margin-bottom: 8px; color: #9ca3af; font-size: 14px;">Confirmar Nova Senha</label>
+              <input type="password" id="confirmPassword" required style="
+                width: 100%;
+                padding: 12px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                color: #ffffff;
+                font-size: 14px;
+                box-sizing: border-box;
+              ">
+            </div>
+            
+            <button type="submit" style="
+              width: 100%;
+              background: linear-gradient(45deg, #ef4444, #dc2626);
+              color: white;
+              border: none;
+              padding: 12px;
+              border-radius: 8px;
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              margin-top: 8px;
+            " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+              Alterar Senha
+            </button>
+          </form>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      // Adicionar evento de submit
+      document.getElementById('changePasswordForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        if (newPassword !== confirmPassword) {
+          alert('As senhas não coincidem!');
+          return;
+        }
+        
+        if (newPassword.length < 6) {
+          alert('A nova senha deve ter pelo menos 6 caracteres!');
+          return;
+        }
+        
+        try {
+          const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+          const response = await fetch(`/api/clientes/${userData.id}/senha`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              senhaAtual: currentPassword,
+              novaSenha: newPassword
+            })
+          });
+          
+          if (response.ok) {
+            alert('Senha alterada com sucesso!');
+            modal.remove();
+          } else {
+            const error = await response.text();
+            alert('Erro ao alterar senha: ' + error);
+          }
+        } catch (error) {
+          console.error('Erro:', error);
+          alert('Erro ao alterar senha. Tente novamente.');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
